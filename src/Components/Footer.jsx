@@ -26,7 +26,7 @@ export default function Footer() {
           </p>
           <p>Code licensed MIT, docs CC BY 3.0.</p>
           <p className="text-muted">Currently v5.3.2.</p>
-        </div>
+       </div>
         <div className="links d-flex flex-column">
           <h4>Links</h4>
           <Link
