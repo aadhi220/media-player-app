@@ -5,14 +5,20 @@ import { deleteVideo } from "../services/allAPI";
 
 
 
-const VideoCard = ({displayData}) =>{
+const VideoCard = ({displayData,setDeleteVideoStatus}) =>{
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-const handleVideoDelete =(id)=>{
-  deleteVideo(id)
+const handleVideoDelete =async (id)=>{
+  try{
+  const responce= await deleteVideo(id)
+  }
+  catch(error) {
+  console.log(error.responce);
+  }
+  setDeleteVideoStatus(true)
 }
 
   return (
@@ -25,13 +31,13 @@ const handleVideoDelete =(id)=>{
           height={'180px'}
           width={'100%'}
           style={{objectFit:'cover',transform:'scale(1)'}}
-          src={displayData.url}
+          src={displayData?.url}
         />
         <Card.Body>
           <div className="d-flex justify-content-between">
             {" "}
-            <Card.Title>{displayData.caption}</Card.Title>{" "}
-            <button className="bg-transparent border-0" onClick={()=>handleVideoDelete(displayData.id)}>
+            <Card.Title>{displayData?.caption}</Card.Title>{" "}
+            <button className="bg-transparent border-0" onClick={()=>handleVideoDelete(displayData?.id)}>
               <i className="fa-solid fa-trash" style={{ color: "#ff0000" }}></i>
             </button>
           </div>
@@ -45,18 +51,19 @@ const handleVideoDelete =(id)=>{
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title>{displayData.caption}</Modal.Title>
+          <Modal.Title>{displayData?.caption}</Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
-          <div>
+          <div className="w-100 h-100">
             {" "}
             <iframe
-              height={"400px"}
-              width={"100%"}
+            style={
+              {height:"30rem",width:"30rem"}
+            }
               
-              src={displayData.embedLink}
-              title={displayData.caption}
+              src={displayData?.embedLink}
+              title={displayData?.caption}
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullscreen={true}

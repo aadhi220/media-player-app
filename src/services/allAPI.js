@@ -27,7 +27,7 @@ return await commonAPI("GET",`${serverURL}/videos/${id}`,"")
 export const deleteVideo = async (id)=> {
     // call delete http reqest to http://localhost:4000/videos/id to remove video from json server
 //return response to videocard component
-return await commonAPI("DELETE",`${serverURL}/videos/${id}`,"") 
+return await commonAPI("DELETE",`${serverURL}/videos/${id}`,{}) 
 }
 
 export const addCategory = async (body)=> {

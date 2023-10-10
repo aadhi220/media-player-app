@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import { uploadVideo } from "../services/allAPI";
 
-function Add() {
+function Add({setUploadVideoServerResponce}) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -40,7 +40,10 @@ function Add() {
 
         //checking weather scuccess or not
      if (responce.status>=200 && responce.status <=300) {
+      //set server responce 
+      setUploadVideoServerResponce(responce.data)
       alert(`${responce.data.caption} video uploaded sucessfully`)
+   
      }else {
       alert("Plz give uniqe id")
      }

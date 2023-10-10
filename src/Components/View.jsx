@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react'
 import VideoCard from './VideoCard'
 import { Col, Row } from 'react-bootstrap'
 import { getAllVideos } from '../services/allAPI'
-function View() {
+function View({uploadVideoServerResponce}) {
+
+  const [deleteVideoStatus,setDeleteVideoStatus]=useState(false)
 
   const [allVideos,setAllVideos]=useState([])
 const getAllUploadedVideos = async() => {
@@ -24,7 +26,8 @@ const getAllUploadedVideos = async() => {
 
 useEffect(()=> {
   getAllUploadedVideos()
-},[])
+  setDeleteVideoStatus(false)
+},[uploadVideoServerResponce,deleteVideoStatus])
 
   console.log();
   return (
@@ -33,7 +36,7 @@ useEffect(()=> {
         allVideos.length>0 ? 
   allVideos.map(video=> (
 <Col sm={12} md={6} lg={4} xl={3}>
-   <VideoCard displayData={video}/>   
+   <VideoCard displayData={video}  setDeleteVideoStatus={setDeleteVideoStatus}/>   
       </Col>
 
   ))
