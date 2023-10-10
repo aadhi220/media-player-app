@@ -1,24 +1,42 @@
-import React from 'react'
-import { useState } from 'react';
-import { Card, Modal } from 'react-bootstrap';
+import React from "react";
+import { useState } from "react";
+import { Card, Modal } from "react-bootstrap";
+import { deleteVideo } from "../services/allAPI";
 
 
-function VideoCard() {
+
+const VideoCard = ({displayData}) =>{
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+const handleVideoDelete =(id)=>{
+  deleteVideo(id)
+}
+
   return (
     <>
 
-    
-      <Card>
-        <Card.Img onClick={handleShow} variant="top" src="https://imgmusic.com/uploads/album/cover/221/Funky_Grooves_Vol2_ZPP072.jpg" />
+    {displayData && <Card className="mt-3">
+        <Card.Img
+          onClick={handleShow}
+          variant="top"
+          height={'180px'}
+          width={'100%'}
+          style={{objectFit:'cover',transform:'scale(1)'}}
+          src={displayData.url}
+        />
         <Card.Body>
-          <Card.Title>Card Title</Card.Title>
-          
+          <div className="d-flex justify-content-between">
+            {" "}
+            <Card.Title>{displayData.caption}</Card.Title>{" "}
+            <button className="bg-transparent border-0" onClick={()=>handleVideoDelete(displayData.id)}>
+              <i className="fa-solid fa-trash" style={{ color: "#ff0000" }}></i>
+            </button>
+          </div>
         </Card.Body>
-      </Card>
+      </Card>}
 
       <Modal
         show={show}
@@ -27,15 +45,29 @@ function VideoCard() {
         keyboard={false}
       >
         <Modal.Header closeButton>
-            <Modal.Title>Video Caption</Modal.Title>
-          </Modal.Header>
-  
-          <Modal.Body>
-         <div > <iframe  width="414" height="232" src="https://www.youtube.com/embed/N3AkSS5hXMA?autoplay=1" title="What Is React (React js) &amp; Why Is It So Popular?" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen={true}></iframe></div>
-          </Modal.Body>
+          <Modal.Title>{displayData.caption}</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+          <div>
+            {" "}
+            <iframe
+              height={"400px"}
+              width={"100%"}
+              
+              src={displayData.embedLink}
+              title={displayData.caption}
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullscreen={true}
+            ></iframe>
+          </div>
+
+          
+        </Modal.Body>
       </Modal>
     </>
-  )
+  );
 }
 
-export default VideoCard
+export default VideoCard;

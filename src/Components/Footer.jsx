@@ -93,28 +93,28 @@ export default function Footer() {
               className=""
               style={{ textDecoration: "none", color: "white" }}
             >
-              <i class="fa-brands fa-linkedin fa-2xl"></i>
+              <i className="fa-brands fa-linkedin fa-2xl"></i>
             </Link>
             <Link
               to={"/"}
               className=""
               style={{ textDecoration: "none", color: "white" }}
             >
-              <i class="fa-brands fa-facebook fa-2xl"></i>
+              <i className="fa-brands fa-facebook fa-2xl"></i>
             </Link>
             <Link
               to={"/"}
               className=""
               style={{ textDecoration: "none", color: "white" }}
             >
-              <i class="fa-brands fa-github fa-2xl"></i>
+              <i className="fa-brands fa-github fa-2xl"></i>
             </Link>
             <Link
               to={"/"}
               className=""
               style={{ textDecoration: "none", color: "white" }}
             > 
-              <i class="fa-brands fa-instagram fa-2xl"></i>
+              <i className="fa-brands fa-instagram fa-2xl"></i>
             </Link>
           </div>
         </div>
