@@ -30,16 +30,21 @@ export const deleteVideo = async (id)=> {
 return await commonAPI("DELETE",`${serverURL}/videos/${id}`,{}) 
 }
 
-export const addCategory = async (body)=> {
+export const saveCategory = async (body)=> {
        // call post http reqest to http://localhost:4000/categories/ to add categorie to  json server
 //return response to Category component
 return await commonAPI("POST",`${serverURL}/categories`,body)  
 }
 
+export const getCategory = async ()=> {
+    // call post http reqest to http://localhost:4000/categories/ to add categorie to  json server
+//return response to Category component
+return await commonAPI("GET",`${serverURL}/categories`,"")  
+}
 export const deleteCategory = async (id)=> {
         // call delete http reqest to http://localhost:4000/categories/id to remove a category from json server
 //return response to Category component
-return await commonAPI("DELETE",`${serverURL}/categories/${id}`,"") 
+return await commonAPI("DELETE",`${serverURL}/categories/${id}`,{}) 
 }
 
 export const PostWatchHistory = async (videoHistory)=> {
