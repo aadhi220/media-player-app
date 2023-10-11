@@ -42,8 +42,15 @@ export const deleteCategory = async (id)=> {
 return await commonAPI("DELETE",`${serverURL}/categories/${id}`,"") 
 }
 
-// export const watchHistory = async ()=> {
-//            // call get http reqest to http://localhost:4000/videos to get history from json server
-// //return response to view component
-// return await commonAPI("GET",`${serverURL}/videos`,"")
-// }
+export const PostWatchHistory = async (videoHistory)=> {
+           // call post http reqest to http://localhost:4000/videos to store video history to json server
+//return response to videocard component
+return await commonAPI("POST",`${serverURL}/history`,videoHistory)
+}
+
+export const getWatchHistory = async ()=> {
+    // call get http reqest to http://localhost:4000/videos to get history from json server
+//return response to view component
+return await commonAPI("GET",`${serverURL}/history`,"")
+}
+

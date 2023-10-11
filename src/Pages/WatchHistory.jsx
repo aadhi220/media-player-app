@@ -1,6 +1,25 @@
-import React from "react";
+import React, { useState,useEffect } from "react";
 import { Link } from "react-router-dom";
+import { getWatchHistory } from "../services/allAPI";
 export default function WatchHistory() {
+
+ const [videoWatchHistory,setVideoWatchHistory]=useState([])
+
+ const getAllWatchHistory = async ()=>
+ {
+  try {
+    const{data}=await getWatchHistory()
+setVideoWatchHistory(data)
+    
+  } catch (error) {
+    console.log(error.data);
+  }
+ }
+
+ useEffect(() => {
+  getAllWatchHistory()
+}, []);
+  
   return (
     <>
       <div className="container mt-5 mb-5 d-flex justify-content-between flex-column">
@@ -12,19 +31,29 @@ export default function WatchHistory() {
           </Link>
        </div>
         <table className="table mt-5 mb-5 ">
-          <thead>
+        <thead>
             <tr><th>#</th>
             <th>Caption</th>
             <th>URL</th>
             <th>TimeStamp</th></tr>
           </thead>
           <tbody>
+          { 
+          videoWatchHistory.length >0 ?  videoWatchHistory.map((history,index)=> (
+            
             <tr>
-              <td>1</td>
-              <td>Kabe</td>
-              <td><a href="https://imgmusic.com/uploads/album/cover/221/Funky_Grooves_Vol2_ZPP072.jpg">https://imgmusic.com/uploads/album/cover/221/Funky_Grooves_Vol2_ZPP072.jpg</a></td>
-              <td>4/1/43</td>
-            </tr>
+            <td>{index+1}</td>
+            <td>{history?.caption}</td>
+            <td><a target="_blank" href={history?.embedLink}>{history.embedLink}</a></td>
+            <td>{history?.formatedDate}</td>
+          </tr>
+
+
+
+          ))
+          : <div>No Watch history</div>
+           
+          } 
           </tbody>
         </table>
       </div>

@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { Card, Modal } from "react-bootstrap";
-import { deleteVideo } from "../services/allAPI";
+import { PostWatchHistory, deleteVideo } from "../services/allAPI";
 
 
 
@@ -9,14 +9,31 @@ const VideoCard = ({displayData,setDeleteVideoStatus}) =>{
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = async () => {
+    
+    setShow(true);
+    // get caption and link
+    const{caption ,embedLink}= displayData
+    //generate timestap
+    let today = new Date()
+    const formatedDate = new Intl.DateTimeFormat("en-US",{year:"numeric",month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'}).format(today);
 
+    let history= {caption,embedLink,formatedDate} 
+    try {
+
+       await PostWatchHistory(history)
+      
+   
+    } catch (error) {
+      
+    }
+   }
 const handleVideoDelete =async (id)=>{
   try{
   const responce= await deleteVideo(id)
   }
   catch(error) {
-  console.log(error.responce);
+  
   }
   setDeleteVideoStatus(true)
 }
@@ -64,7 +81,7 @@ const handleVideoDelete =async (id)=>{
               
               src={displayData?.embedLink}
               title={displayData?.caption}
-              frameborder="0"
+             
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullscreen={true}
             ></iframe>

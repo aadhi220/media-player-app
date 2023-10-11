@@ -10,7 +10,7 @@ export default function LandingPage() {
   return (
 
     <>
-<Row className=' w-100 align-items-center justify-content-center '>
+<Row style={{overflow:'hidden'}} className=' w-100 align-items-center p-5 justify-content-center '>
   <Col></Col>
 <Col lg={4}>
   <h3>Welcome to <span className='text-warning'>Media Player</span></h3>

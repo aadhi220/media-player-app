@@ -11,7 +11,7 @@ const getAllUploadedVideos = async() => {
   try {
     const {data} = await getAllVideos()
     setAllVideos(data)
-    console.log(data);
+   
     
      
 
@@ -20,7 +20,7 @@ const getAllUploadedVideos = async() => {
 
 
   } catch (error) {
-    console.log(error.responce.data);
+
   }
 }  
 
@@ -29,7 +29,7 @@ useEffect(()=> {
   setDeleteVideoStatus(false)
 },[uploadVideoServerResponce,deleteVideoStatus])
 
-  console.log();
+  
   return (
     <Row>
       {

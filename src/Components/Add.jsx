@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import { uploadVideo } from "../services/allAPI";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Add({setUploadVideoServerResponce}) {
   const [show, setShow] = useState(false);
@@ -8,7 +10,6 @@ function Add({setUploadVideoServerResponce}) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [video, setVideo] = useState({
-    id: "",
     caption: "",
     url: "",
     embedLink: "",
@@ -26,9 +27,9 @@ function Add({setUploadVideoServerResponce}) {
 
   const handleUpload = async () => {
     //get details of video
-    const { id, caption, url, embedLink } = video;
+    const { caption, url, embedLink } = video;
 // if videinfo is emty
-    if (id && caption && url && embedLink) {
+    if ( caption && url && embedLink) {
       
       
       //makeing api call
@@ -36,28 +37,35 @@ function Add({setUploadVideoServerResponce}) {
       try {
 
         const responce = await uploadVideo(video);
-        console.log(responce);
+        
 
         //checking weather scuccess or not
      if (responce.status>=200 && responce.status <=300) {
       //set server responce 
       setUploadVideoServerResponce(responce.data)
-      alert(`${responce.data.caption} video uploaded sucessfully`)
+      toast.success(`${responce.data.caption} video uploaded sucessfully`)
+
+      setVideo({
+        
+        caption: "",
+        url: "",
+        embedLink: "",
+      })
    
      }else {
-      alert("Plz give uniqe id")
+      toast.error("Uploading error please wait some time!!")
      }
 handleClose()
 
       } catch (error) {
-        console.log(error.responce.data);
+       
       }
     } else {
-      alert("plz");
+      toast.warning("plz fill completely");
     }
   };
 
-  console.log(video);
+
   return (
     <>
       <div className="d-flex align-items-center">
@@ -79,14 +87,7 @@ handleClose()
         <Modal.Body>
           <p>Please Fill the following details !!!</p>
           <Form>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Control
-                type="text"
-                onChange={(e) => setVideo({ ...video, id: e.target.value })}
-                placeholder="Enter video ID"
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
+                       <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Control
                 type="text"
                 onChange={(e) =>
@@ -120,6 +121,13 @@ handleClose()
           </Button>
         </Modal.Footer>
       </Modal>
+
+      <ToastContainer 
+      theme="colored"
+      autoClose={2000}
+      
+      
+      />
     </>
   );
 }
