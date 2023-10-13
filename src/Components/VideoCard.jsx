@@ -37,18 +37,23 @@ const handleVideoDelete =async (id)=>{
   }
   setDeleteVideoStatus(true)
 }
+const dragStarted =(e,id)=> { 
+  e.dataTransfer.setData("cardId",id)
+}
 
   return (
     <>
 
-    {displayData && <Card className="mt-3">
+    {
+     displayData && 
+    <Card className="mb-3" draggable onDragStart={(e)=>dragStarted(e,displayData?.id)}>
         <Card.Img
           onClick={handleShow}
           variant="top"
           height={'180px'}
           width={'100%'}
           style={{objectFit:'cover',transform:'scale(1)'}}
-          src={displayData?.url}
+          src={displayData?.url} 
         />
         <Card.Body>
           <div className="d-flex justify-content-between">
@@ -72,12 +77,11 @@ const handleVideoDelete =async (id)=>{
         </Modal.Header>
 
         <Modal.Body>
-          <div className="w-100 h-100">
+          <div className="d-flex justify-content-center align-items-center ">
             {" "}
             <iframe
-            style={
-              {height:"30rem",width:"30rem"}
-            }
+         height="300"
+         width="460"
               
               src={displayData?.embedLink}
               title={displayData?.caption}
