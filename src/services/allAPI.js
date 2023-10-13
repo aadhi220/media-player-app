@@ -41,6 +41,17 @@ export const getCategory = async ()=> {
 //return response to Category component
 return await commonAPI("GET",`${serverURL}/categories`,"")  
 }
+// update category from json server
+export const updateCategory = async (id,body)=> {
+    // call post http reqest to http://localhost:4000/categories/id to update   categories from   json server
+//return response to Category component
+return await commonAPI("PUT",`${serverURL}/categories/${id}`,body)  
+}
+
+
+
+
+
 export const deleteCategory = async (id)=> {
         // call delete http reqest to http://localhost:4000/categories/id to remove a category from json server
 //return response to Category component
@@ -58,4 +69,13 @@ export const getWatchHistory = async ()=> {
 //return response to view component
 return await commonAPI("GET",`${serverURL}/history`,"")
 }
+
+// delete history from watch history
+
+export const deleteWatchHistory = async (id)=> {
+    // call delete http reqest to http://localhost:4000/watch history to delete a history from json server
+//return response to watchhistory component
+return await commonAPI("DELETE",`${serverURL}/history/${id}`,{})
+}
+
 

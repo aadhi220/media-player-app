@@ -10,6 +10,7 @@ import Category from '../Components/Category'
 
 function Home() {
 
+const[draggedVideoId,setDraggedVideoId]=useState('')
   const [uploadVideoServerResponce,setUploadVideoServerResponce] =useState({})
   return (
     <>
@@ -21,11 +22,11 @@ function Home() {
       <Col className='all-video col-lg-8'>
       <h3>All Videos</h3>
       <div className='videos w-100'>
-        <View uploadVideoServerResponce={uploadVideoServerResponce} />
+        <View  setDraggedVideoId={setDraggedVideoId}  uploadVideoServerResponce={uploadVideoServerResponce} />
       </div>
       </Col>
       <Col className='category col-lg-3'>
-        <Category/>
+        <Category draggedVideoId={draggedVideoId} />
       </Col>
     </Row>
     </>
