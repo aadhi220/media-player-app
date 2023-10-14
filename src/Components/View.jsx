@@ -20,8 +20,8 @@ function View({ uploadVideoServerResponce }) {
 
   return (
     <Row>
-      {allVideos.length > 0 ? (
-        allVideos.map((video) => (
+      {allVideos?.length > 0 ? (
+        allVideos?.map((video) => (
           <Col sm={12} md={6} lg={4} xl={3}>
             <VideoCard
               displayData={video}
